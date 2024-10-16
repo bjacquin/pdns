@@ -2994,8 +2994,10 @@ static void handleRuntimeDefaults(Logr::log_t log)
 #endif
 
   const string RUNTIME = "*runtime determined*";
-  if (::arg()["version-string"] == RUNTIME) { // i.e. not set explicitly
+  if (::arg()["version-string"] == RUNTIME || ::arg()["version-string"] == "full") { // i.e. not set explicitly
     ::arg().set("version-string") = fullVersionString();
+  } else if (::arg()["version-string"] == "powerdns") {
+    ::arg().set("version-string") = "Served by PowerDNS Recursor - https://doc.powerdns.com/recursor/";
   }
 
   if (::arg()["server-id"] == RUNTIME) { // i.e. not set explicitly

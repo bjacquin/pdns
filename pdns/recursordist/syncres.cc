@@ -763,7 +763,13 @@ bool SyncRes::doSpecialNamesResolve(const DNSName& qname, const QType qtype, con
     handled = true;
     if (qtype == QType::TXT || qtype == QType::ANY) {
       if (qname == versionbind || qname == versionpdns) {
-        answers.emplace_back(QType::TXT, "\"" + ::arg()["version-string"] + "\"");
+	if (::arg()["version-string"] == "full") {
+          answers.emplace_back(QType::TXT, "\"" + ::arg()["version-string"] + "\"");
+	} else if (::arg()["version-string"] == "powerdns") {
+          answers.emplace_back(QType::TXT, "\"Served by PowerDNS Recursor - https://doc.powerdns.com/recursor/\"");
+	} else if (::arg()["version-string"] == "anonymous") {
+          return RCode::ServFail;
+	}
       }
       else if (s_serverID != "disabled") {
         answers.emplace_back(QType::TXT, "\"" + s_serverID + "\"");

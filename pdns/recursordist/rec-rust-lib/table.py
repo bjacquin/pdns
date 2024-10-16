@@ -3115,6 +3115,10 @@ Print version of this binary. Useful for checking which version of the PowerDNS 
         'doc' : '''
 By default, PowerDNS replies to the 'version.bind' query with its version number.
 Security conscious users may wish to override the reply PowerDNS issues.
+Set the ``version-string`` to ``full`` to get the default behaviour, to
+``powerdns`` to just make it state ``Served by PowerDNS Recursor -
+https://doc.powerdns.com/recursor/``. The ``anonymous`` setting will
+return a ServFail. You can set this response to a custom value as well.
  ''',
     },
     {
