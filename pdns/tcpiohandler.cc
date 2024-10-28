@@ -26,10 +26,9 @@ static std::vector<std::vector<uint8_t>> getALPNVector(TLSFrontend::ALPN alpn, b
       return std::vector<std::vector<uint8_t>>{{'h', '2'}};
     }
     /* For server contexts, we want to set the ALPN for DoH (note that h2o sets it own ALPN values):
-       - HTTP/1.1 so that the OpenSSL callback ALPN accepts it, letting us later return a static response
        - HTTP/2
     */
-    return std::vector<std::vector<uint8_t>>{{'h', '2'},{'h', 't', 't', 'p', '/', '1', '.', '1'}};
+    return std::vector<std::vector<uint8_t>>{{'h', '2'}};
   }
   return {};
 }
